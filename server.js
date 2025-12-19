@@ -1,10 +1,3 @@
-import dotenv from "dotenv";
-if (process.env.NODE_ENV !== "production") {
-  dotenv.config();
-}
-
-
-
 import express from'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
@@ -18,13 +11,11 @@ app.use(cors())
 
 
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect("mongodb+srv://jeevasanjay:jeeva123@cluster0.xobvtqe.mongodb.net/Vocabulary")
   .then(() => {
     console.log("✅ MongoDB Atlas Connected");
 
-    app.listen(process.env.PORT || 4000, () => {
-      console.log("🚀 Server running on port 4000");
-    });
+  
   })
   .catch((err) => {
     console.error("❌ MongoDB connection error:", err.message);
@@ -36,5 +27,11 @@ mongoose
 app.use('/users',urouter)
 app.use('/words',Wrouter)
 app.use('/quizzes',Qrouter)
+
+
+
+app.listen(4000, () => {
+  console.log("🚀 Server running on port 4000");
+});
 
 
