@@ -1,4 +1,5 @@
-
+import dotenv from "dotenv";
+dotenv.config();
 import express from'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
@@ -11,7 +12,7 @@ app.use(express.json())
 app.use(cors())
 
 mongoose
-  .connect('mongodb+srv://jeevasanjay:jeeva123@cluster0.xobvtqe.mongodb.net/Vocabulary')
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Atlas Connected"))
   .catch(err => console.error(err.message));
 
@@ -23,4 +24,4 @@ app.use('/quizzes',Qrouter)
 
 
 
-app.listen(4000,()=>{console.log("server  running on 4000")})
+app.listen(process.env.PORT || 4000,()=>{console.log("server  running on 4000")})
