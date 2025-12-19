@@ -25,8 +25,8 @@ mongoose
     console.error("❌ MongoDB connection error:", err.message);
   });
  
+ 
 
-  
 app.use('/users',urouter)
 app.use('/words',Wrouter)
 app.use('/quizzes',Qrouter)
