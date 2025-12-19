@@ -12,13 +12,18 @@ app.use(express.json())
 app.use(cors())
 
 
-
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Atlas Connected"))
-  .catch(err => console.error(err.message));
+  .then(() => {
+    console.log("✅ MongoDB Atlas Connected");
 
- 
+    app.listen(process.env.PORT || 4000, () => {
+      console.log("🚀 Server running on port 4000");
+    });
+  })
+  .catch((err) => {
+    console.error("❌ MongoDB connection error:", err.message);
+  });
 
 app.use('/users',urouter)
 app.use('/words',Wrouter)
@@ -26,4 +31,3 @@ app.use('/quizzes',Qrouter)
 
 
 
-app.listen(process.env.PORT || 4000,()=>{console.log("server  running on 4000")})
